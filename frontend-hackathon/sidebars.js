@@ -57,8 +57,7 @@ const sidebars = {
           items: [
             'chapter-3/python-control',
             'chapter-3/bridging-ai',
-            'chapter-3/action-execution',
-            'chapter-3/exercises'
+            'chapter-3/action-execution'
           ],
         },
         {
@@ -67,8 +66,7 @@ const sidebars = {
           items: [
             'chapter-4/urdf-structure',
             'chapter-4/links-joints-kinematics',
-            'chapter-4/simulation-prep',
-            'chapter-4/exercises'
+            'chapter-4/simulation-prep'
           ],
         },
       ],
@@ -83,8 +81,7 @@ const sidebars = {
           items: [
             'chapter-5/digital-twin-concepts',
             'chapter-5/digital-twin-benefits',
-            'chapter-5/digital-twin-applications',
-            'chapter-5/digital-twin-exercises'
+            'chapter-5/digital-twin-applications'
           ],
         },
         {

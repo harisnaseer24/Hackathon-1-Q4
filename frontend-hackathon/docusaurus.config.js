@@ -12,7 +12,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'ROS 2 as the Robotic Nervous System',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.jpg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -113,7 +113,7 @@ const config = {
         title: 'ROS2 Robotics',
         logo: {
           alt: 'ROS2 Robotics Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo.jpg',
         },
         items: [
           {
@@ -128,7 +128,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/PMLS/Hackathon-1-Q4',
+            href: 'https://github.com/harisnaseer24/Hackathon-1-Q4',
             label: 'GitHub',
             position: 'right',
           },
