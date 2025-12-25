@@ -142,6 +142,39 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Module 4: Vision-Language-Action (VLA)',
+      items: [
+        {
+          type: 'category',
+          label: 'Chapter 11: VLA Systems',
+          items: [
+            'chapter-11/vla-systems-overview',
+            'chapter-11/vla-architecture',
+            'chapter-11/perception-action-loop'
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Chapter 12: Voice-to-Action',
+          items: [
+            'chapter-12/voice-to-action-concepts',
+            'chapter-12/whisper-integration',
+            'chapter-12/intent-mapping'
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Chapter 13: Cognitive Planning',
+          items: [
+            'chapter-13/cognitive-planning-fundamentals',
+            'chapter-13/goal-decomposition',
+            'chapter-13/action-sequencing'
+          ],
+        },
+      ],
+    },
   ],
 };
 
