@@ -1,0 +1,715 @@
+<?xml version="1.0"?>
+<robot name="advanced_humanoid" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Gazebo plugins for simulation -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/advanced_humanoid</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+  <!-- Joint state publisher plugin -->
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <joint_name>neck_joint</joint_name>
+      <joint_name>left_shoulder_yaw</joint_name>
+      <joint_name>left_shoulder_pitch</joint_name>
+      <joint_name>left_elbow</joint_name>
+      <joint_name>right_shoulder_yaw</joint_name>
+      <joint_name>right_shoulder_pitch</joint_name>
+      <joint_name>right_elbow</joint_name>
+      <joint_name>left_hip_yaw</joint_name>
+      <joint_name>left_hip_pitch</joint_name>
+      <joint_name>left_knee</joint_name>
+      <joint_name>right_hip_yaw</joint_name>
+      <joint_name>right_hip_pitch</joint_name>
+      <joint_name>right_knee</joint_name>
+    </plugin>
+  </gazebo>
+
+  <!-- Torso Link -->
+  <link name="torso">
+    <visual>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.25 0.5"/>
+      </geometry>
+      <material name="robot_gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.25 0.5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <mass value="8.0"/>
+      <inertia ixx="0.4" ixy="0" ixz="0" iyy="0.4" iyz="0" izz="0.2"/>
+    </inertial>
+  </link>
+
+  <!-- Gazebo properties for torso -->
+  <gazebo reference="torso">
+    <material>Gazebo/Gray</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+    <kp>1000000.0</kp>
+    <kd>1000000.0</kd>
+    <self_collide>false</self_collide>
+  </gazebo>
+
+  <!-- Head Link -->
+  <joint name="neck_joint" type="revolute">
+    <parent link="torso"/>
+    <child link="head"/>
+    <origin xyz="0 0 0.55" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.785" upper="0.785" effort="5" velocity="3"/>
+  </joint>
+
+  <link name="head">
+    <visual>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.1"/>
+      </geometry>
+      <material name="skin_color">
+        <color rgba="1 0.85 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <mass value="2.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Gazebo properties for head -->
+  <gazebo reference="head">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Left Shoulder Complex -->
+  <joint name="left_shoulder_yaw" type="revolute">
+    <parent link="torso"/>
+    <child link="left_upper_arm"/>
+    <origin xyz="0.18 0 0.35" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="30" velocity="2"/>
+  </joint>
+
+  <link name="left_upper_arm">
+    <visual>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <material name="skin_color">
+        <color rgba="1 0.85 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="left_upper_arm">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <joint name="left_shoulder_pitch" type="revolute">
+    <parent link="left_upper_arm"/>
+    <child link="left_forearm"/>
+    <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.356" upper="0.785" effort="25" velocity="2"/>
+  </joint>
+
+  <link name="left_forearm">
+    <visual>
+      <origin xyz="0 0 -0.125" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.25"/>
+      </geometry>
+      <material name="skin_color">
+        <color rgba="1 0.85 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.125" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.25"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.125" rpy="0 0 0"/>
+      <mass value="0.7"/>
+      <inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="left_forearm">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <joint name="left_elbow" type="revolute">
+    <parent link="left_forearm"/>
+    <child link="left_hand"/>
+    <origin xyz="0 0 -0.25" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0" upper="2.0" effort="15" velocity="2"/>
+  </joint>
+
+  <link name="left_hand">
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.08 0.1"/>
+      </geometry>
+      <material name="skin_color">
+        <color rgba="1 0.85 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.08 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.0005" ixy="0" ixz="0" iyy="0.0005" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="left_hand">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Right Shoulder Complex -->
+  <joint name="right_shoulder_yaw" type="revolute">
+    <parent link="torso"/>
+    <child link="right_upper_arm"/>
+    <origin xyz="-0.18 0 0.35" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="30" velocity="2"/>
+  </joint>
+
+  <link name="right_upper_arm">
+    <visual>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+      <material name="skin_color">
+        <color rgba="1 0.85 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.3"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="right_upper_arm">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <joint name="right_shoulder_pitch" type="revolute">
+    <parent link="right_upper_arm"/>
+    <child link="right_forearm"/>
+    <origin xyz="0 0 -0.3" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.356" upper="0.785" effort="25" velocity="2"/>
+  </joint>
+
+  <link name="right_forearm">
+    <visual>
+      <origin xyz="0 0 -0.125" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.25"/>
+      </geometry>
+      <material name="skin_color">
+        <color rgba="1 0.85 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.125" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.04" length="0.25"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.125" rpy="0 0 0"/>
+      <mass value="0.7"/>
+      <inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="right_forearm">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <joint name="right_elbow" type="revolute">
+    <parent link="right_forearm"/>
+    <child link="right_hand"/>
+    <origin xyz="0 0 -0.25" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0" upper="2.0" effort="15" velocity="2"/>
+  </joint>
+
+  <link name="right_hand">
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.08 0.1"/>
+      </geometry>
+      <material name="skin_color">
+        <color rgba="1 0.85 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.08 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.0005" ixy="0" ixz="0" iyy="0.0005" iyz="0" izz="0.0005"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="right_hand">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- Left Hip Complex -->
+  <joint name="left_hip_yaw" type="revolute">
+    <parent link="torso"/>
+    <child link="left_thigh"/>
+    <origin xyz="0.075 -0.05 -0.1" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.5" upper="0.5" effort="60" velocity="1.5"/>
+  </joint>
+
+  <link name="left_thigh">
+    <visual>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.4"/>
+      </geometry>
+      <material name="robot_gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.4"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <mass value="2.0"/>
+      <inertia ixx="0.04" ixy="0" ixz="0" iyy="0.04" iyz="0" izz="0.002"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="left_thigh">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <joint name="left_hip_pitch" type="revolute">
+    <parent link="left_thigh"/>
+    <child link="left_shin"/>
+    <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.0" upper="0.5" effort="50" velocity="1.5"/>
+  </joint>
+
+  <link name="left_shin">
+    <visual>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.055" length="0.4"/>
+      </geometry>
+      <material name="robot_gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.055" length="0.4"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <mass value="1.5"/>
+      <inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.0015"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="left_shin">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <joint name="left_knee" type="revolute">
+    <parent link="left_shin"/>
+    <child link="left_foot"/>
+    <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.5" upper="0" effort="40" velocity="1.5"/>
+  </joint>
+
+  <link name="left_foot">
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.15 0.08 0.05"/>
+      </geometry>
+      <material name="robot_gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.15 0.08 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="left_foot">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <!-- Right Hip Complex -->
+  <joint name="right_hip_yaw" type="revolute">
+    <parent link="torso"/>
+    <child link="right_thigh"/>
+    <origin xyz="-0.075 -0.05 -0.1" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.5" upper="0.5" effort="60" velocity="1.5"/>
+  </joint>
+
+  <link name="right_thigh">
+    <visual>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.4"/>
+      </geometry>
+      <material name="robot_gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.06" length="0.4"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <mass value="2.0"/>
+      <inertia ixx="0.04" ixy="0" ixz="0" iyy="0.04" iyz="0" izz="0.002"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="right_thigh">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <joint name="right_hip_pitch" type="revolute">
+    <parent link="right_thigh"/>
+    <child link="right_shin"/>
+    <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.0" upper="0.5" effort="50" velocity="1.5"/>
+  </joint>
+
+  <link name="right_shin">
+    <visual>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.055" length="0.4"/>
+      </geometry>
+      <material name="robot_gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.055" length="0.4"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.2" rpy="0 0 0"/>
+      <mass value="1.5"/>
+      <inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.0015"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="right_shin">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <joint name="right_knee" type="revolute">
+    <parent link="right_shin"/>
+    <child link="right_foot"/>
+    <origin xyz="0 0 -0.4" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-2.5" upper="0" effort="40" velocity="1.5"/>
+  </joint>
+
+  <link name="right_foot">
+    <visual>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.15 0.08 0.05"/>
+      </geometry>
+      <material name="robot_gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.15 0.08 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+      <mass value="0.8"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="right_foot">
+    <material>Gazebo/Gray</material>
+  </gazebo>
+
+  <!-- Transmissions for all joints -->
+  <transmission name="neck_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="neck_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="neck_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_shoulder_yaw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_yaw">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_shoulder_yaw_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_shoulder_pitch_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_shoulder_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_shoulder_pitch_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_elbow_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_elbow">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_elbow_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_shoulder_yaw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_yaw">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_shoulder_yaw_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_shoulder_pitch_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_shoulder_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_shoulder_pitch_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_elbow_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_elbow">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_elbow_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_hip_yaw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_hip_yaw">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_hip_yaw_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_hip_pitch_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_hip_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_hip_pitch_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_knee_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_knee">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_knee_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_hip_yaw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_hip_yaw">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_hip_yaw_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_hip_pitch_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_hip_pitch">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_hip_pitch_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_knee_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_knee">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_knee_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- IMU sensor for balance -->
+  <gazebo reference="torso">
+    <sensor name="torso_imu" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>false</visualize>
+      <topic>__default_topic__</topic>
+      <plugin name="torso_imu_plugin" filename="libgazebo_ros_imu.so">
+        <bodyName>torso</bodyName>
+        <topicName>imu/data</topicName>
+        <serviceName>imu/service</serviceName>
+        <gaussianNoise>0.01</gaussianNoise>
+        <updateRateHZ>100.0</updateRateHZ>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Camera sensor for head -->
+  <gazebo reference="head">
+    <sensor name="head_camera" type="camera">
+      <always_on>true</always_on>
+      <update_rate>30</update_rate>
+      <camera>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <format>R8G8B8</format>
+          <width>640</width>
+          <height>480</height>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>100</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>head_camera</cameraName>
+        <imageTopicName>camera/image_raw</imageTopicName>
+        <cameraInfoTopicName>camera/camera_info</cameraInfoTopicName>
+        <frameName>head</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>
