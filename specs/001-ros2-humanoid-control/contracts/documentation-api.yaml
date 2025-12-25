@@ -1,0 +1,159 @@
+# Documentation API Contract for ROS2 Educational Module
+
+# This API provides access to documentation content, search functionality,
+# and learning progress tracking for the ROS2 educational module.
+
+openapi: 3.0.0
+info:
+  title: ROS2 Educational Module API
+  description: API for documentation content, search, and learning progress in the ROS2 educational module
+  version: 1.0.0
+
+paths:
+  /api/chapters:
+    get:
+      summary: Get list of all chapters
+      description: Retrieve a list of all chapters in the ROS2 educational module
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+  /api/chapters/{chapterId}:
+    get:
+      summary: Get chapter content
+      description: Retrieve the content of a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          description: ID of the chapter to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chapter content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /api/search:
+    get:
+      summary: Search documentation
+      description: Search through the documentation content
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: Search query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: Maximum number of results to return
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SearchResult'
+                  totalCount:
+                    type: integer
+
+components:
+  schemas:
+    Chapter:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - order
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chapter
+        title:
+          type: string
+          description: Title of the chapter
+        content:
+          type: string
+          description: Markdown content of the chapter
+        order:
+          type: integer
+          description: Order of the chapter in the module
+        learningObjectives:
+          type: array
+          items:
+            type: string
+          description: List of learning objectives for the chapter
+        codeExamples:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeExample'
+
+    CodeExample:
+      type: object
+      required:
+        - id
+        - title
+        - code
+        - language
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the code example
+        title:
+          type: string
+          description: Brief description of the code example
+        code:
+          type: string
+          description: The actual code
+        language:
+          type: string
+          description: Programming language of the code
+        description:
+          type: string
+          description: Explanation of what the code does
+
+    SearchResult:
+      type: object
+      required:
+        - id
+        - title
+        - contentPreview
+        - chapterId
+      properties:
+        id:
+          type: string
+          description: ID of the search result
+        title:
+          type: string
+          description: Title of the section/chapter
+        contentPreview:
+          type: string
+          description: Preview of the matching content
+        chapterId:
+          type: string
+          description: ID of the chapter containing the result
+        relevanceScore:
+          type: number
+          description: Relevance score of the result

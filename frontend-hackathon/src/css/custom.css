@@ -1,0 +1,114 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2563eb; /* Blue color matching robotics/tech theme */
+  --ifm-color-primary-dark: #1d4ed8;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #1e3a8a;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Additional custom variables for robotics theme */
+  --robotics-accent: #0ea5e9; /* Sky blue for robotics elements */
+  --code-bg: #f8fafc; /* Light gray for code blocks */
+  --section-bg: #f9fafb; /* Light background for sections */
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #60a5fa; /* Light blue in dark mode */
+  --ifm-color-primary-dark: #3b82f6;
+  --ifm-color-primary-darker: #2563eb;
+  --ifm-color-primary-darkest: #1d4ed8;
+  --ifm-color-primary-light: #93c5fd;
+  --ifm-color-primary-lighter: #bfdbfe;
+  --ifm-color-primary-lightest: #dbeafe;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  /* Dark mode specific variables */
+  --robotics-accent: #7dd3fc; /* Lighter sky blue for dark mode */
+  --code-bg: #1e293b; /* Dark gray for code blocks in dark mode */
+  --section-bg: #1f2937; /* Dark background for sections in dark mode */
+}
+
+/* Custom styles for robotics/ROS2 educational content */
+.hero--primary {
+  background-color: var(--ifm-color-primary);
+  background-image: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--robotics-accent) 100%);
+}
+
+/* Custom card styling for lesson sections */
+.card {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom styling for code examples */
+.code-block {
+  background-color: var(--code-bg) !important;
+  border-left: 4px solid var(--ifm-color-primary);
+  margin: 1rem 0;
+}
+
+/* Custom styling for important notes */
+.admonition--note {
+  border-left-color: var(--ifm-color-primary);
+}
+
+.admonition--tip {
+  border-left-color: #10b981; /* Green for tips */
+}
+
+.admonition--caution {
+  border-left-color: #f59e0b; /* Yellow for cautions */
+}
+
+.admonition--danger {
+  border-left-color: #ef4444; /* Red for dangers/warnings */
+}
+
+/* Styling for robotics diagrams/images */
+.roscpp-code {
+  font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+  background-color: var(--code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+}
+
+/* Custom styling for navigation sidebar */
+.menu__list-item-collapsible .menu__link--sublist {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+/* Styling for API reference sections */
+.api-ref {
+  background-color: var(--section-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid var(--robotics-accent);
+}
+
+/* Custom styling for exercise sections */
+.exercise-box {
+  border: 2px dashed var(--robotics-accent);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background-color: rgba(14, 165, 233, 0.05);
+}

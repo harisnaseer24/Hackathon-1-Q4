@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s)",
+      "Bash(dir /s /b)",
+      "Bash(powershell \"Get-ChildItem -Recurse | Select-Object FullName\")",
+      "Bash(git fetch --all --prune)",
+      "Bash(dir)",
+      "Bash(powershell \"Get-ChildItem -Directory | Where-Object { $_Name -match ''^[0-9]+'' }\")",
+      "Bash(powershell \"Get-ChildItem\")",
+      "Bash(powershell \"Get-ChildItem -Recurse\")",
+      "Bash(powershell \"Get-ChildItem -Path history\\prompts\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/setup-plan.ps1\" -Json)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/update-agent-context.ps1\" -AgentType claude)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -RequireTasks -IncludeTasks)",
+      "Bash(dir \"specs/001-ros2-humanoid-control/checklists\")",
+      "Bash(git rev-parse --git-dir)",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(npx create-docusaurus@latest . classic --typescript throws)",
+      "Bash(npx create-docusaurus@latest . classic --typescript=false)",
+      "Bash(powershell \"Get-ChildItem -Path specs -Directory -Filter ''*-digital-twin-robotics'' -ErrorAction SilentlyContinue | Select-Object Name\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/create-new-feature.ps1\" -Json -Number 1 -ShortName \"digital-twin-robotics\" -Description \"Module: Physical AI & Humanoid Robotics\nModule 2: The Digital Twin (Gazebo & Unity)\n\nTarget audience:\nAI and robotics engineers.\n\nFocus:\nHumanoid simulation and sensor modeling.\n\nChapters:\n1. Digital Twins for Robotics\n   - Simulation purpose\n   - Sim-to-real basics\n\n2. Physics with Gazebo\n   - Dynamics and collisions\n   - URDF integration\n\n3. Sensor Simulation\n   - LiDAR, depth, IMU\n   - ROS 2 data flow\n\nSuccess criteria:\n- Reader simulates humanoids\n- Reader models sensors\n\nConstraints:\n- Docusaurus .md only\n\nNot building:\n- Game engines\n- Real hardware setup\")",
+      "Bash(.specify/scripts/powershell/setup-plan.ps1 -Json)",
+      "WebSearch",
+      "Bash(mkdir -p frontend-hackathon/docs/chapter-5 frontend-hackathon/docs/chapter-6 frontend-hackathon/docs/chapter-7)"
+    ]
+  }
+}

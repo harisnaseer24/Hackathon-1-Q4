@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- This launch file demonstrates how to load and simulate a humanoid robot in Gazebo -->
+  <!-- Note: This is a template that would need to be adapted for actual ROS 2 usage -->
+
+  <!-- In a real ROS 2 package, you would load the URDF like this: -->
+  <!--
+  <param name="robot_description"
+         command="xacro $(find-pkg-share your_robot_description)/urdf/advanced_humanoid.urdf"/>
+  -->
+
+  <!-- For demonstration purposes, this file shows the structure of a launch file -->
+  <!-- that would load the advanced humanoid model and start simulation -->
+
+  <!-- The actual command would depend on your ROS 2 workspace setup -->
+  <!-- Example command to run manually: -->
+  <!-- ros2 launch your_package launch_humanoid.launch.xml -->
+
+  <!-- Nodes would include: -->
+  <!-- - robot_state_publisher to publish transforms -->
+  <!-- - joint_state_publisher for joint states -->
+  <!-- - gazebo_ros spawn_entity to load the robot in simulation -->
+
+</launch>
