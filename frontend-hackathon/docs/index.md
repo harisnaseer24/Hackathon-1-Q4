@@ -10,30 +10,26 @@ Welcome to the comprehensive guide on Physical AI & Humanoid Robotics with ROS 2
 
 ## Table of Contents
 
-### [Chapter 1: The Robotic Nervous System (ROS 2)](/docs/category/chapter-1-ros-2-as-the-robotic-nervous-system)
+### Chapter 1: The Robotic Nervous System (ROS 2)
 - [ROS 2 as the Robotic Nervous System](/docs/chapter-1/nervous-system)
 - [The Role of ROS 2 in Physical AI](/docs/chapter-1/role-in-physical-ai)
 - [Nodes, Executors, and DDS Communication](/docs/chapter-1/nodes-executors-dds)
 - [Humanoid Control Architecture Overview](/docs/chapter-1/control-architecture)
-- [Chapter 1 Exercises](/docs/chapter-1/exercises)
 
-### [Chapter 2: Nodes, Topics, and Services](/docs/category/chapter-2-nodes-topics-and-services)
+### Chapter 2: Nodes, Topics, and Services
 - [ROS 2 Communication Primitives](/docs/chapter-2/communication-primitives)
 - [Sensor and Actuator Data Flow](/docs/chapter-2/data-flow)
 - [Control Patterns for Humanoid Robots](/docs/chapter-2/control-patterns)
-- [Chapter 2 Exercises](/docs/chapter-2/exercises)
 
-### [Chapter 3: Python Agents with rclpy](/docs/category/chapter-3-python-agents-with-rclpy)
+### Chapter 3: Python Agents with rclpy
 - [Python Control using rclpy](/docs/chapter-3/python-control)
 - [Bridging AI Agents to ROS Controllers](/docs/chapter-3/bridging-ai)
 - [Action Execution from Decision Logic](/docs/chapter-3/action-execution)
-- [Chapter 3 Exercises](/docs/chapter-3/exercises)
 
-### [Chapter 4: Humanoid Modeling with URDF](/docs/category/chapter-4-humanoid-modeling-with-urdf)
+### Chapter 4: Humanoid Modeling with URDF
 - [URDF Structure and Purpose](/docs/chapter-4/urdf-structure)
 - [Links, Joints, and Kinematics](/docs/chapter-4/links-joints-kinematics)
 - [Preparing Models for Simulation](/docs/chapter-4/simulation-prep)
-- [Chapter 4 Exercises](/docs/chapter-4/exercises)
 
 ## Cross-Chapter Connections
 

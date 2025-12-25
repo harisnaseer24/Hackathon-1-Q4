@@ -26,7 +26,8 @@
       "WebSearch",
       "Bash(mkdir -p frontend-hackathon/docs/chapter-5 frontend-hackathon/docs/chapter-6 frontend-hackathon/docs/chapter-7)",
       "Bash(grep -l \"^---\" frontend-hackathon/docs/chapter-8/*.md frontend-hackathon/docs/chapter-9/*.md frontend-hackathon/docs/chapter-10/*.md)",
-      "Bash(git checkout -b 2-vla-robotics)"
+      "Bash(git checkout -b 2-vla-robotics)",
+      "Bash(npm run build)"
     ]
   }
 }
