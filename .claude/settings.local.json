@@ -24,7 +24,8 @@
       "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/create-new-feature.ps1\" -Json -Number 1 -ShortName \"digital-twin-robotics\" -Description \"Module: Physical AI & Humanoid Robotics\nModule 2: The Digital Twin (Gazebo & Unity)\n\nTarget audience:\nAI and robotics engineers.\n\nFocus:\nHumanoid simulation and sensor modeling.\n\nChapters:\n1. Digital Twins for Robotics\n   - Simulation purpose\n   - Sim-to-real basics\n\n2. Physics with Gazebo\n   - Dynamics and collisions\n   - URDF integration\n\n3. Sensor Simulation\n   - LiDAR, depth, IMU\n   - ROS 2 data flow\n\nSuccess criteria:\n- Reader simulates humanoids\n- Reader models sensors\n\nConstraints:\n- Docusaurus .md only\n\nNot building:\n- Game engines\n- Real hardware setup\")",
       "Bash(.specify/scripts/powershell/setup-plan.ps1 -Json)",
       "WebSearch",
-      "Bash(mkdir -p frontend-hackathon/docs/chapter-5 frontend-hackathon/docs/chapter-6 frontend-hackathon/docs/chapter-7)"
+      "Bash(mkdir -p frontend-hackathon/docs/chapter-5 frontend-hackathon/docs/chapter-6 frontend-hackathon/docs/chapter-7)",
+      "Bash(grep -l \"^---\" frontend-hackathon/docs/chapter-8/*.md frontend-hackathon/docs/chapter-9/*.md frontend-hackathon/docs/chapter-10/*.md)"
     ]
   }
 }

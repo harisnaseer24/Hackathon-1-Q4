@@ -109,6 +109,39 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Module 3: The AI-Robot Brain (NVIDIA Isaac™)',
+      items: [
+        {
+          type: 'category',
+          label: 'Chapter 8: NVIDIA Isaac Stack',
+          items: [
+            'chapter-8/isaac-stack-overview',
+            'chapter-8/isaac-sim-introduction',
+            'chapter-8/isaac-ros-integration'
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Chapter 9: Synthetic Data & Perception',
+          items: [
+            'chapter-9/synthetic-data-concepts',
+            'chapter-9/photorealistic-simulation',
+            'chapter-9/perception-model-training'
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Chapter 10: Navigation & Localization',
+          items: [
+            'chapter-10/vslam-fundamentals',
+            'chapter-10/humanoid-navigation',
+            'chapter-10/navigation-examples'
+          ],
+        },
+      ],
+    },
   ],
 };
 
